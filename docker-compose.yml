@@ -1,0 +1,38 @@
+version: '3'
+services:
+  api:
+    container_name: rails_workshop_api
+    command: rails s -b 0.0.0.0
+    build: .
+    env_file: .env
+    volumes:
+      - .:/app:rw
+    tty: true
+    stdin_open: true
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+      - pgadmin
+  db:
+    container_name: rails_workshop_db
+    image: postgres:10-alpine
+    env_file: .env
+    ports:
+      - 5439:5432
+    volumes:
+      - data-postgres:/var/lib/postgresql/data
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: rails_workshop_pgadmin
+    env_file: .env
+    restart: always
+    ports:
+      - 8022:80
+    volumes:
+      - ./.db/pgadmin-servers.json:/pgadmin4/servers.json
+      - ./.db/pgadmin:/var/lib/pgadmin
+
+volumes:
+  data-postgres:
+    driver: local
