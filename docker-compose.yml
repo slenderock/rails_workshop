@@ -27,6 +27,7 @@ services:
     container_name: rails_workshop_pgadmin
     env_file: .env
     restart: always
+    user: root
     ports:
       - 8022:80
     volumes:
