@@ -4,10 +4,12 @@ class ApiController < ApplicationController
   private
 
   def parameter_missing(error)
-    render_error(error.param => ['is missing or the value is empty'])
+    render ErrorFormatter.call(
+      error: { error.param => 'is missing or the value is empty' }
+    )
   end
 
   def render_error(errors = {}, status = :unprocessable_entity )
-    render json: { errors: errors }, status: status
+    render ErrorFormatter.call(errors: errors, status: status)
   end
 end

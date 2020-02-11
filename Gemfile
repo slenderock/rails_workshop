@@ -17,12 +17,13 @@ gem 'puma', '~> 4.1'
 gem 'bcrypt', '~> 3.1.7'
 
 gem 'grape', '~> 1.3.0'
-
+gem 'grape-entity'
 gem 'grape-swagger'
-
 gem 'grape-swagger-rails'
 
-gem 'grape-entity'
+gem 'interactor', '~> 3.0'
+
+gem 'jwt'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

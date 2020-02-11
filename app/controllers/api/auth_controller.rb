@@ -13,9 +13,18 @@ class Api::AuthController < GrapeController
       requires :password, type: String
     end
     post do
-      user = User.last
+      user = User.find_by(email: params[:email])
 
-      present user, with: ::UserEntity::Full
+      if user.authenticate(params[:password])
+        present user, with: ::UserEntity::Full
+      else
+        error_handler = ErrorFormatter.call(
+          error: { user: 'unauthorized' },
+          status: 401
+        )
+
+        error!(*error_handler.values_at(:json, :status))
+      end
     end
   end
 end
