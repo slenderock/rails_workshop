@@ -1,4 +1,4 @@
-class UserForm
+class User::Create
   include ActiveModel::Model
 
   ATTRIBUTES = [:email, :password, :first_name, :last_name, :birthday]

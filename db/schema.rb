@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 2020_01_28_171107) do
     t.index ["author_id"], name: "index_posts_on_author_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "user", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
     t.date "birthday"
@@ -66,6 +66,6 @@ ActiveRecord::Schema.define(version: 2020_01_28_171107) do
   end
 
   add_foreign_key "comments", "posts"
-  add_foreign_key "comments", "users", column: "author_id"
-  add_foreign_key "posts", "users", column: "author_id"
+  add_foreign_key "comments", "user", column: "author_id"
+  add_foreign_key "posts", "user", column: "author_id"
 end

@@ -1,6 +1,6 @@
 class Api::UserController < ApiController
   def create
-    user_form = UserForm.new(user_params)
+    user_form = User::Create.new(user_params)
 
     if user_form.save
       render json: { user: user_form.serialized_record }
@@ -24,6 +24,6 @@ class Api::UserController < ApiController
   private
 
   def user_params
-    params.require(:user).permit(UserForm::ATTRIBUTES)
+    params.require(:user).permit(Create::ATTRIBUTES)
   end
 end

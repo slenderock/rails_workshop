@@ -32,6 +32,13 @@ services:
     volumes:
       - ./.db/pgadmin-servers.json:/pgadmin4/servers.json
       - ./.db/pgadmin:/var/lib/pgadmin
+  swagger_ui:
+    image: swaggerapi/swagger-ui
+    container_name: rails_workshop_swagger_ui
+    env_file: .env
+    restart: always
+    ports:
+      - 8080:8080
 
 volumes:
   data-postgres:
