@@ -15,8 +15,10 @@ class Api::AuthController < GrapeController
     post do
       user = User.find_by(email: params[:email])
 
-      if user.authenticate(params[:password])
-        present user, with: ::UserEntity::Full
+      if user&.authenticate(params[:password])
+        present token: JwtAuth.call(user: user).result
+
+        present user: user, with: ::UserEntity::Full
       else
         error_handler = ErrorFormatter.call(
           error: { user: 'unauthorized' },
