@@ -18,12 +18,18 @@ class Api::UserController < ApiController
   end
 
   def show
-    render json: { action: action_name }
+    command = JwtDecode.call(token: request.headers['Authorization'])
+    if command.success?
+      render json: { user: UserEntity::Full.represent(command.user) }
+    else
+      render command.response
+    end
+
   end
 
   private
 
   def user_params
-    params.require(:user).permit(Create::ATTRIBUTES)
+    params.require(:user).permit(User::Create::ATTRIBUTES)
   end
 end

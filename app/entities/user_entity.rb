@@ -3,7 +3,7 @@ module UserEntity
     expose :first_name
     expose :last_name
     expose :birthday,
-      if: ->(record) { record.birthday.past? }
+      if: ->(record) { record.birthday&.past? }
   end
 
   class Full < Short

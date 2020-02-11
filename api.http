@@ -1,5 +1,6 @@
 GET http://localhost:3000/api/user
 Accept: application/json
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE1ODM5NTQ2MzR9.QWocb6CN-rtHzztreVBI1GW2D7kgobLfP3eJa_QBQfo
 
 ###
 
@@ -34,7 +35,7 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "email": "email@example.com",
+  "email": "user@example.com",
   "password": "password"
 }
 
