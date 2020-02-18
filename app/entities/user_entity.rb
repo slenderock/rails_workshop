@@ -1,5 +1,6 @@
 module UserEntity
   class Short < Grape::Entity
+    expose :id
     expose :first_name
     expose :last_name
     expose :birthday,
