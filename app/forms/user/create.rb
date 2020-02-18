@@ -27,10 +27,6 @@ class User::Create
     self.success = false
   end
 
-  def serialized_record
-    user.slice(*ATTRIBUTES).without(:password)
-  end
-
   private
 
   def persist!

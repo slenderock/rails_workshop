@@ -1,9 +1,11 @@
 class Api::UserController < ApiController
+  before_action :authenticate!, only: %i[show destroy update]
+
   def create
     user_form = User::Create.new(user_params)
 
     if user_form.save
-      render json: { user: user_form.serialized_record }
+      render json: { user: represent(user_form.user) }
     else
       render_error user_form.errors.messages
     end
@@ -18,16 +20,14 @@ class Api::UserController < ApiController
   end
 
   def show
-    command = JwtDecode.call(token: request.headers['Authorization'])
-    if command.success?
-      render json: { user: UserEntity::Full.represent(command.user) }
-    else
-      render command.response
-    end
-
+    render json: { user: represent(current_user) }
   end
 
   private
+
+  def represent(record)
+    UserEntity::Full.represent(record)
+  end
 
   def user_params
     params.require(:user).permit(User::Create::ATTRIBUTES)
